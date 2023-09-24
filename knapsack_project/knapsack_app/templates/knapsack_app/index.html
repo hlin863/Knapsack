@@ -1,0 +1,39 @@
+{% load static %} <!-- Add this line to load the static template tags -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient Library</title>
+    <!-- Load the static files -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <h1>Ingredient Library</h1>
+
+    <!-- Create the image panel -->
+    <div class="image-panel">
+        <!-- Image container for Flour -->
+        <div class="image-container">
+            <img src="{% static 'img/flour.jpg' %}" alt="Flour">
+            <p>Flour</p>
+        </div>
+
+        <!-- Image container for Butter -->
+        <div class="image-container">
+            <img src="{% static 'img/butter.jpg' %}" alt="Butter">
+            <p>Butter</p>
+        </div>
+
+        <!-- Image container for Sugar -->
+        <div class="image-container">
+            <img src="{% static 'img/sugar.jpg' %}" alt="Sugar">
+            <p>Sugar</p>
+        </div>
+    </div>
+</body>
+
+</html>

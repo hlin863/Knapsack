@@ -1,0 +1,64 @@
+/* Reset some default browser styles */
+body,
+h1,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the body with a background color */
+body {
+    background-color: #f7f7f7;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the h1 heading */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+
+/* Style the image panel */
+.image-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    max-width: 800px;
+    /* Limit the maximum width of the panel */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style each image container */
+.image-container {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Style the images */
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    aspect-ratio: 1/1;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+}
+
+/* Add hover effect to the image containers */
+.image-container:hover {
+    transform: scale(1.05);
+}
+
+/* Style the text below each image */
+.image-container p {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #555;
+}
