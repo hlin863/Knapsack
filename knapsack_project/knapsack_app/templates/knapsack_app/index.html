@@ -104,26 +104,18 @@
         </div>
     </div>
 
-    <script>
-        document.getElementById('updateButton').addEventListener('click', function (event) {
-            event.preventDefault();
-
-            const selectedProduct = document.getElementById('productSelect').value;
-            const productContainer = document.querySelector(`.image-container[data-product="${selectedProduct}"]`);
-
-            if (!productContainer) return;
-
-            const valueInput = document.getElementById('value').value || 'N/A';
-            const quantityInput = document.getElementById('quantity').value || 'N/A';
-            const weightInput = document.getElementById('weight').value || 'N/A';
-
-            productContainer.querySelector(`td[id="${selectedProduct.toLowerCase()}-value"]`).textContent = "$" + valueInput;
-            productContainer.querySelector(`td[id="${selectedProduct.toLowerCase()}-quantity"]`).textContent = quantityInput + "g";
-            productContainer.querySelector(`td[id="${selectedProduct.toLowerCase()}-weight"]`).textContent = weightInput + "kg";
-        });
-    </script>
+    <!-- Output panel for Knapsack algorithm -->
+    <div class="output-panel">
+        <h2>Knapsack Results</h2>
+        <p>Maximum Value: <span id="max-value">0</span></p>
+        <p>Selected Items:</p>
+        <ul id="selected-items"></ul>
+        <button type = "submit" id="calculateKnapsack">Run Knapsack Algorithm</button>
+    </div>
 
 
+    <!-- Link to the external JS file -->
+    <script src="{% static 'js/scripts.js' %}"></script>
 
 
 </body>

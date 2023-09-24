@@ -108,3 +108,20 @@ input[type="text"] {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+/* Output Panel Styles */
+.output-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+#selected-items {
+    list-style-type: none;
+    padding: 0;
+}
