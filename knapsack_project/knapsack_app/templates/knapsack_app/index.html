@@ -76,56 +76,117 @@
     <div class="customizer-panel">
         <!-- Customizer container with 2 rows-->
         <div class="customizer-container">
-            <!-- Row 1: Input Fields -->
-            <div class="customizer-row">
+            <form id="updateForm" method="post" action="{% url 'update_inventory' %}">
+                {% csrf_token %}
                 <!-- Product Name -->
                 <div class="customizer-item">
                     <label for="product">Product Name:</label>
-                    <input type="text" id="product" placeholder="Enter product name...">
+                    <input type="text" id="product" name="product" placeholder="Enter product name...">
                 </div>
                 <!-- Value -->
                 <div class="customizer-item">
                     <label for="value">Value:</label>
-                    <input type="text" id="value" placeholder="Enter value...">
+                    <input type="text" id="value" name="value" placeholder="Enter value...">
                 </div>
-    
                 <!-- Quantity -->
                 <div class="customizer-item">
                     <label for="quantity">Quantity:</label>
-                    <input type="text" id="quantity" placeholder="Enter quantity...">
+                    <input type="text" id="quantity" name="quantity" placeholder="Enter quantity...">
                 </div>
-    
                 <!-- Weight -->
                 <div class="customizer-item">
                     <label for="weight">Weight:</label>
-                    <input type="text" id="weight" placeholder="Enter weight...">
+                    <input type="text" id="weight" name="weight" placeholder="Enter weight...">
                 </div>
-            </div>
-    
-            <!-- Row 2: Buttons -->
-            <div class="customizer-row">
                 <button type="submit" id="updateButton">Update Details</button>
-                <button id="resetButton">Reset</button>
-            </div>
+            </form>
+
         </div>
     </div>
 
     <script>
-        // Update the placeholders with dynamic data
-        const productData = {{ product_data| safe }};
+        // Function to update image details
+        function updateImageDetails() {
+            const productNameInput = document.getElementById('product');
+            const valueInput = document.getElementById('value');
+            const quantityInput = document.getElementById('quantity');
+            const weightInput = document.getElementById('weight');
+            const imageDetails = document.querySelectorAll('.image-details');
 
-        for (const product in productData) {
-            if (productData.hasOwnProperty(product)) {
-                const valueElement = document.getElementById(`${product}-value`);
-                const quantityElement = document.getElementById(`${product}-quantity`);
-                const weightElement = document.getElementById(`${product}-weight`);
+            const productName = productNameInput.value || 'N/A';
+            const value = valueInput.value || 'N/A';
+            const quantity = quantityInput.value || 'N/A';
+            const weight = weightInput.value || 'N/A';
 
-                valueElement.textContent = productData[product].value;
-                quantityElement.textContent = productData[product].quantity;
-                weightElement.textContent = productData[product].weight;
-            }
+            imageDetails.forEach((detail) => {
+                const heading = detail.querySelector('th');
+                const data = detail.querySelector('td');
+
+                heading.textContent = `Product: ${productName}`;
+                data.textContent = `Value: ${value} | Quantity: ${quantity} | Weight: ${weight}`;
+            });
         }
+
+        // Function to reset input fields
+        function resetInputs() {
+            const inputs = document.querySelectorAll('input[type="text"]');
+            inputs.forEach((input) => {
+                input.value = '';
+            });
+
+            // Update the image details after resetting
+            updateImageDetails();
+        }
+
+        // Prevent form submission
+        const updateForm = document.getElementById('updateForm');
+        updateForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+            updateImageDetails();
+
+            // Submit the form using AJAX to the Django view
+            fetch(updateForm.action, {
+                method: 'POST',
+                body: new FormData(updateForm),
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken'), // Include CSRF token
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the response as needed (e.g., show a success message)
+                    console.log(data.message);
+                })
+                .catch(error => {
+                    // Handle errors
+                    console.error('Error:', error);
+                });
+        });
+
+        // Function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.startsWith(name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // Listen for button clicks
+        const resetButton = document.getElementById('resetButton');
+        resetButton.addEventListener('click', resetInputs);
+
+        // Initialize image details
+        updateImageDetails();
     </script>
+
 
 
 
