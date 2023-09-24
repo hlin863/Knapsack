@@ -117,9 +117,9 @@
             const quantityInput = document.getElementById('quantity').value || 'N/A';
             const weightInput = document.getElementById('weight').value || 'N/A';
 
-            productContainer.querySelector(`td[id="${selectedProduct.toLowerCase()}-value"]`).textContent = valueInput;
-            productContainer.querySelector(`td[id="${selectedProduct.toLowerCase()}-quantity"]`).textContent = quantityInput;
-            productContainer.querySelector(`td[id="${selectedProduct.toLowerCase()}-weight"]`).textContent = weightInput;
+            productContainer.querySelector(`td[id="${selectedProduct.toLowerCase()}-value"]`).textContent = "$" + valueInput;
+            productContainer.querySelector(`td[id="${selectedProduct.toLowerCase()}-quantity"]`).textContent = quantityInput + "g";
+            productContainer.querySelector(`td[id="${selectedProduct.toLowerCase()}-weight"]`).textContent = weightInput + "kg";
         });
     </script>
 
