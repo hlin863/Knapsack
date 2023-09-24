@@ -18,22 +18,117 @@
     <div class="image-panel">
         <!-- Image container for Flour -->
         <div class="image-container">
-            <img src="{% static 'img/flour.jpg' %}" alt="Flour">
             <p>Flour</p>
+            <img src="{% static 'img/flour.jpg' %}" alt="Flour">
+            <table class="image-details">
+                <tr>
+                    <th>Value</th>
+                    <th>Quantity</th>
+                    <th>Weight</th>
+                </tr>
+                <tr>
+                    <td id="flour-value">$2.99</td>
+                    <td id="flour-quantity">500g</td>
+                    <td id="flour-weight">0.5 kg</td>
+                </tr>
+            </table>
         </div>
-
+    
         <!-- Image container for Butter -->
         <div class="image-container">
-            <img src="{% static 'img/butter.jpg' %}" alt="Butter">
             <p>Butter</p>
+            <img src="{% static 'img/butter.jpg' %}" alt="Butter">
+            <table class="image-details">
+                <tr>
+                    <th>Value</th>
+                    <th>Quantity</th>
+                    <th>Weight</th>
+                </tr>
+                <tr>
+                    <td id="butter-value">$3.49</td>
+                    <td id="butter-quantity">200g</td>
+                    <td id="butter-weight">0.2 kg</td>
+                </tr>
+            </table>
         </div>
-
+    
         <!-- Image container for Sugar -->
         <div class="image-container">
-            <img src="{% static 'img/sugar.jpg' %}" alt="Sugar">
             <p>Sugar</p>
+            <img src="{% static 'img/sugar.jpg' %}" alt="Sugar">
+            <table class="image-details">
+                <tr>
+                    <th>Value</th>
+                    <th>Quantity</th>
+                    <th>Weight</th>
+                </tr>
+                <tr>
+                    <td id="sugar-value">$1.99</td>
+                    <td id="sugar-quantity">1 kg</td>
+                    <td id="sugar-weight">1 kg</td>
+                </tr>
+            </table>
         </div>
     </div>
+
+
+    <!-- Customizer panel -->
+    <div class="customizer-panel">
+        <!-- Customizer container with 2 rows-->
+        <div class="customizer-container">
+            <!-- Row 1: Input Fields -->
+            <div class="customizer-row">
+                <!-- Product Name -->
+                <div class="customizer-item">
+                    <label for="product">Product Name:</label>
+                    <input type="text" id="product" placeholder="Enter product name...">
+                </div>
+                <!-- Value -->
+                <div class="customizer-item">
+                    <label for="value">Value:</label>
+                    <input type="text" id="value" placeholder="Enter value...">
+                </div>
+    
+                <!-- Quantity -->
+                <div class="customizer-item">
+                    <label for="quantity">Quantity:</label>
+                    <input type="text" id="quantity" placeholder="Enter quantity...">
+                </div>
+    
+                <!-- Weight -->
+                <div class="customizer-item">
+                    <label for="weight">Weight:</label>
+                    <input type="text" id="weight" placeholder="Enter weight...">
+                </div>
+            </div>
+    
+            <!-- Row 2: Buttons -->
+            <div class="customizer-row">
+                <button type="submit" id="updateButton">Update Details</button>
+                <button id="resetButton">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update the placeholders with dynamic data
+        const productData = {{ product_data| safe }};
+
+        for (const product in productData) {
+            if (productData.hasOwnProperty(product)) {
+                const valueElement = document.getElementById(`${product}-value`);
+                const quantityElement = document.getElementById(`${product}-quantity`);
+                const weightElement = document.getElementById(`${product}-weight`);
+
+                valueElement.textContent = productData[product].value;
+                quantityElement.textContent = productData[product].quantity;
+                weightElement.textContent = productData[product].weight;
+            }
+        }
+    </script>
+
+
+
 </body>
 
 </html>
